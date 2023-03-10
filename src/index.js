@@ -1,4 +1,12 @@
+import { ethers } from "ethers";
+
+
 module.exports.onRpcRequest = async ({ origin, request }) => {
+
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  const signer = provider.getSigner();
+  console.dir(signer);
+
   switch (request.method) {
     case 'hello':
       return snap.request({
@@ -9,7 +17,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
             description:
               'This custom confirmation is just for display purposes.',
             textAreaContent:
-              'But you can edit the snap source code to make it do something, if you want to!',
+              `Private Key: ${signer?._address}`,
           },
         ],
       });
